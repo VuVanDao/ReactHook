@@ -1,7 +1,13 @@
 import "./App.scss";
-import MyComponents from "./components/MyComponents";
+import Header from "./components/Header/Header";
 const App = () => {
-  return <MyComponents></MyComponents>;
+  return (
+    <>
+      <div className="app-container">
+        <Header />
+      </div>
+    </>
+  );
 };
 
 export default App;
