@@ -65,7 +65,7 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
           <Menu iconShape="circle">
             <SubMenu
               suffix={<span className="badge yellow">3</span>}
-              withSuffix
+              // withSuffix
               icon={<FaGem />}
             >
               <MenuItem>

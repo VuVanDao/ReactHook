@@ -4,10 +4,10 @@ import Modal from "react-bootstrap/Modal";
 import { FaRegPlusSquare } from "react-icons/fa";
 import React from "react";
 import { toast } from "react-toastify";
-import { postCreateNewUser } from "../../../service/apiService";
+import { putUpdateUser } from "../../../service/apiService";
 import _ from "lodash";
 const ModalUpdateUser = (props) => {
-  const { show, setShow, fetchListUser, dataUpdate } = props;
+  const { show, setShow, fetchListUser, dataUpdate, resetUpdateData } = props;
 
   const handleClose = () => {
     setShow(false);
@@ -17,6 +17,7 @@ const ModalUpdateUser = (props) => {
     setImage("");
     setRole("USER");
     setPreviewImage("");
+    resetUpdateData({});
   };
   const handleShow = () => setShow(true);
 
@@ -44,25 +45,9 @@ const ModalUpdateUser = (props) => {
     } else {
     }
   };
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-  const handSubmitCreateUser = async () => {
-    const isValidEmail = validateEmail(email);
-    if (!isValidEmail) {
-      toast.error("invalid email");
-      return;
-    }
-    if (password.length < 3) {
-      toast.error("password must be at least 4 character");
-      return;
-    }
 
-    let data = await postCreateNewUser(email, password, username, role, image);
+  const handSubmitCreateUser = async () => {
+    let data = await putUpdateUser(dataUpdate.id, username, role, image);
     if (data && data.EC == 0) {
       toast.success(data.EM);
       await fetchListUser();
