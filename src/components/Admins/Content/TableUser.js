@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllUserService } from "../../../service/apiService";
 const TableUser = (props) => {
-  const { listUser, handleClickBtnUpdate } = props;
+  const { listUser, handleClickBtnUpdate, handleClickBtnView } = props;
 
   return (
     <>
@@ -28,7 +28,12 @@ const TableUser = (props) => {
                   <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td style={{ textAlign: "center" }}>
-                    <button className="btn btn-secondary">View</button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleClickBtnView(item)}
+                    >
+                      View
+                    </button>
                     <button
                       className="btn btn-warning mx-3"
                       onClick={() => handleClickBtnUpdate(item)}

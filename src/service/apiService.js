@@ -11,7 +11,6 @@ const postCreateNewUser = (email, password, UserName, role, image) => {
 };
 const putUpdateUser = (id, UserName, role, image) => {
   const data = new FormData();
-
   data.append("id", id);
   data.append("username", UserName);
   data.append("role", role);
