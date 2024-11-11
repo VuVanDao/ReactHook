@@ -11,10 +11,12 @@ const TableUserPaginate = (props) => {
     handleClickBtnDelete,
     fetchListUserWithPaginate,
     pageCount,
+    setCurrentPage,
   } = props;
   //   const [pageCount, setPageCount] = useState(10);
   const handlePageClick = (event) => {
     fetchListUserWithPaginate(+event.selected + 1);
+    setCurrentPage(+event.selected + 1);
     console.log(
       `User requested page number ${event.selected}, which is offset `
     );

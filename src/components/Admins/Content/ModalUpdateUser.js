@@ -7,7 +7,16 @@ import { toast } from "react-toastify";
 import { putUpdateUser } from "../../../service/apiService";
 import _ from "lodash";
 const ModalUpdateUser = (props) => {
-  const { show, setShow, fetchListUser, dataUpdate, resetUpdateData } = props;
+  const {
+    show,
+    setShow,
+    fetchListUser,
+    dataUpdate,
+    resetUpdateData,
+    fetchListUserWithPaginate,
+    currentPage,
+    setCurrentPage,
+  } = props;
 
   const handleClose = () => {
     setShow(false);
@@ -50,7 +59,9 @@ const ModalUpdateUser = (props) => {
     let data = await putUpdateUser(dataUpdate.id, username, role, image);
     if (data && data.EC == 0) {
       toast.success(data.EM);
-      await fetchListUser();
+      await fetchListUserWithPaginate(currentPage);
+      // await fetchListUser();
+      setCurrentPage(currentPage);
       handleClose();
     } else {
       toast.error(data.EM);
