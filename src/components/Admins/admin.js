@@ -13,29 +13,19 @@ const Admin = () => {
     <>
       <div className="admin-container">
         <div className="admin-sidebar">
-          <SideBar collapsed={collapsed} />
+          <SideBar collapsed={collapsed} /> {/* sidebar */}
         </div>
         <div className="admin-content">
           <div className="admin-header">
             <FaBars onClick={() => setCollapsed(!collapsed)} />
+            {/* dong , mo sidebar */}
           </div>
           <div className="admin-main">
+            {/* noi chua route con cua admin */}
             <Outlet />
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </>
   );
 };

@@ -60,19 +60,30 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
               dashboard
               <Link to="/admins" />
             </MenuItem>
-            <MenuItem icon={<FaGem />}>components</MenuItem>
+            <MenuItem icon={<FaGem />}>
+              components
+              <Link to="/" />
+            </MenuItem>
           </Menu>
           <Menu iconShape="circle">
             <SubMenu
               suffix={<span className="badge yellow">3</span>}
-              // withSuffix
               icon={<FaGem />}
+              title={"Feature"}
             >
               <MenuItem>
                 Quản lí User <Link to="/admins/manage-users" />
               </MenuItem>
-              <MenuItem> Quản lí Bài Quiz</MenuItem>
+              <MenuItem>
+                Quản lí Bài Quiz
+                <Link to="/admins/login" />
+              </MenuItem>
               <MenuItem> Quản lí Câu hỏi</MenuItem>
+
+              <MenuItem>
+                den trang login
+                <Link to="/admins/login" />
+              </MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
