@@ -1,0 +1,49 @@
+.register-container {
+  .register-header {
+    height: 45px;
+    text-align: right;
+
+    padding: 25px 100px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+  .register-title {
+    font-size: 25px;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .register-welcome {
+    font-size: 20px;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .register-content-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input {
+      margin: 10px 0 0px 0;
+    }
+    button {
+      margin-top: 10px;
+      width: 100%;
+    }
+    .back {
+      margin-top: 20px;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+    .check-password {
+      padding: 20px 20px 20px 0;
+      cursor: pointer;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}

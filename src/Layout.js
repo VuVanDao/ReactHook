@@ -9,6 +9,7 @@ import HomePage from "./components/Home/HomePage";
 import ManageUser from "./components/Admins/Content/ManageUser";
 import DashBoard from "./components/Admins/Content/DashBoard";
 import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 const Layout = () => {
   return (
     <>
@@ -24,6 +25,7 @@ const Layout = () => {
           {/* cai nay la nghich */}
         </Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
       </Routes>
       <ToastContainer
         position="bottom-right"

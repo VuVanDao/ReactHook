@@ -3,6 +3,7 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../service/apiService";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -15,17 +16,18 @@ const Login = (props) => {
     let data = await postLogin(email, password);
     if (data && +data.EC === 0) {
       toast.success(data.EM);
-      navigate("/");
+      navigate("/admins/manage-users");
     } else {
       toast.error(data.EM);
     }
-    console.log("<><><><>", data);
   };
   return (
     <div className="login-container">
       <div className="header">
         <span>Dont't have account yet?</span>
-        <button className="btn btn-dark">Sign up</button>
+        <button className="btn btn-dark" onClick={() => navigate("/register")}>
+          Sign up
+        </button>
       </div>
       <div className="title col-4  mx-auto">VuVanDao</div>
       <div className="welcome col-4  mx-auto">Hello , Who are you?</div>
