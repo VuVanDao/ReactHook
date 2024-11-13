@@ -49,7 +49,7 @@ const Register = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>Email</label>
+          <label>Email (*)</label>
           <input
             type={"email"}
             className="form-control"
@@ -58,7 +58,7 @@ const Register = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>password</label>
+          <label>password (*)</label>
           <input
             type={passwordChecked === true ? "password" : "text"}
             className="form-control"

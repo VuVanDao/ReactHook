@@ -34,5 +34,22 @@
         text-decoration: underline;
       }
     }
+    .btn-submit {
+      text-align: center;
+      &:disabled {
+        cursor: no-drop !important;
+      }
+    }
+    .loaderIcon {
+      animation: spin 1s infinite;
+    }
+    @keyframes spin {
+      from {
+        transform: scale(1) rotate(0deg);
+      }
+      to {
+        transform: scale(1) rotate(360deg);
+      }
+    }
   }
 }
