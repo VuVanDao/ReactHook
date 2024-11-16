@@ -23,7 +23,7 @@ const Login = (props) => {
       dispatch(doLogin(data));
       toast.success(data.EM);
       setIsLoadingData(false);
-      navigate("/admins/manage-users");
+      navigate("/");
     } else {
       toast.error(data.EM);
       setIsLoadingData(false);
