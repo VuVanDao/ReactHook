@@ -28,6 +28,7 @@ const DetailQuiz = (props) => {
               QuestionDescription = item.description;
               image = item.image;
             }
+            item.answers.isSelected = false;
             answers.push(item.answers);
           });
           let detail = {};
@@ -51,6 +52,29 @@ const DetailQuiz = (props) => {
       setIndex(index + 1);
     }
   };
+  const handleCheckBox = (answerId, questionId) => {
+    let dataListClone = _.cloneDeep(dataQuiz);
+    let question = dataListClone.find((item) => {
+      return +item.QuestionId === +questionId;
+    });
+    if (question && question.answers) {
+      let q = question.answers.map((item) => {
+        if (+item.id === +answerId) {
+          item.isSelected = !item.isSelected;
+        }
+        return item;
+      });
+      question.answers = q;
+    }
+    let index = dataListClone.findIndex(
+      (item) => +item.QuestionId === +questionId
+    );
+    if (index > -1) {
+      dataListClone[index] = question;
+      setDataQuiz(dataListClone);
+    }
+    console.log(">>>", dataListClone);
+  };
   return (
     <div className="detail-quiz-container">
       <div className="left-container">
@@ -64,6 +88,7 @@ const DetailQuiz = (props) => {
         <div className="q-content">
           <Question
             index={index}
+            handleCheckBox={handleCheckBox}
             data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
           />
         </div>
@@ -73,6 +98,9 @@ const DetailQuiz = (props) => {
           </button>
           <button className="btn btn-primary " onClick={() => handleNext()}>
             Next
+          </button>
+          <button className="btn btn-warning " onClick={() => handleNext()}>
+            Finish
           </button>
         </div>
       </div>
