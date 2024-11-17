@@ -73,7 +73,31 @@ const DetailQuiz = (props) => {
       dataListClone[index] = question;
       setDataQuiz(dataListClone);
     }
-    console.log(">>>", dataListClone);
+  };
+  const handleFinish = () => {
+    console.log(">>>>", dataQuiz);
+    let payload = {
+      quizId: +quizId,
+      answers: [],
+    };
+    let answers = [];
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((item) => {
+        let questionId = item.QuestionId;
+        let userAnswerId = [];
+        item.answers.forEach((a) => {
+          if (a.isSelected === true) {
+            userAnswerId.push(a.id);
+          }
+        });
+        answers.push({
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
+        });
+      });
+      payload.answers = answers;
+      console.log(">>>>>final", payload);
+    }
   };
   return (
     <div className="detail-quiz-container">
@@ -99,7 +123,7 @@ const DetailQuiz = (props) => {
           <button className="btn btn-primary " onClick={() => handleNext()}>
             Next
           </button>
-          <button className="btn btn-warning " onClick={() => handleNext()}>
+          <button className="btn btn-warning " onClick={() => handleFinish()}>
             Finish
           </button>
         </div>
