@@ -39,7 +39,7 @@ const ListQuiz = (props) => {
                   className="btn btn-primary"
                   onClick={() =>
                     navigate(`/quiz/${item.id}`, {
-                      state: { quizTitle: item.description },
+                      state: { quizTitle: item.description }, //dung cho location
                     })
                   }
                 >
@@ -49,7 +49,7 @@ const ListQuiz = (props) => {
             </div>
           );
         })}
-      {arrQuiz && arrQuiz.length == 0 && <div>You dont have Quiz now...</div>}
+      {arrQuiz && arrQuiz.length === 0 && <div>You dont have Quiz now...</div>}
     </div>
   );
 };
