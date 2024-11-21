@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ProSidebar,
   Menu,
@@ -23,6 +23,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { AiFillAccountBook } from "react-icons/ai";
 import "./SideBar.scss";
 const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
+  const Navigate = useNavigate();
   return (
     <>
       <ProSidebar
@@ -47,7 +48,9 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
             }}
           >
             <AiFillAccountBook size={"3em"} />
-            VanDao HeHe
+            <span onClick={() => Navigate("/")} style={{ cursor: "pointer" }}>
+              VanDao HeHe
+            </span>
           </div>
         </SidebarHeader>
 
@@ -76,7 +79,7 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
               </MenuItem>
               <MenuItem>
                 Quản lí Bài Quiz
-                <Link to="/admins/login" />
+                <Link to="/admins/manage-quizzes" />
               </MenuItem>
               <MenuItem> Quản lí Câu hỏi</MenuItem>
 
