@@ -1,17 +1,40 @@
 import { useState } from "react";
 import "./ManageQuiz.scss";
 import Select from "react-select";
+import { toast } from "react-toastify";
+import { postCreateNewQuiz } from "../../../../service/apiService";
 const options = [
-  { value: "EASY", label: "one" },
-  { value: "MEDIUM", label: "two" },
-  { value: "HARD", label: "three" },
+  { value: "EASY", label: "EASY" },
+  { value: "MEDIUM", label: "MEDIUM" },
+  { value: "HARD", label: "HARD" },
 ];
 const ManageQuiz = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("EASY");
   const [image, setImage] = useState(null);
-  const handleChangeFile = (event) => {};
+  const handleChangeFile = (event) => {
+    if (event.target && event.target.files && event.target.files[0]) {
+      setImage(event.target.files[0]);
+    }
+  };
+  const handleSubmitQuiz = async () => {
+    if (!name || !description) {
+      toast.error("name or description is required");
+      return;
+    } else {
+      let res = await postCreateNewQuiz(description, name, type?.value, image);
+      if (res && res.EC === 0) {
+        setName("");
+        setDescription("");
+        setType("");
+        setImage("");
+        toast.success(res.EM);
+      } else {
+        toast.error(res.EM);
+      }
+    }
+  };
   return (
     <div className="quiz-container">
       <div className="title">Manage Quiz</div>
@@ -19,19 +42,19 @@ const ManageQuiz = () => {
       <hr />
       <fieldset className="border rounded-3 p-3">
         <legend className="float-none w-auto px-3">Add new quiz:</legend>
-        <div class="form-floating mb-3">
+        <div className="form-floating mb-3">
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
           <label>Name</label>
         </div>
-        <div class="form-floating">
+        <div className="form-floating">
           <input
-            type="password"
-            class="form-control"
+            type="text"
+            className="form-control"
             placeholder="description"
             value={description}
             onChange={(event) => setDescription(event.target.value)}
@@ -39,13 +62,28 @@ const ManageQuiz = () => {
           <label>Description</label>
         </div>
         <div className="my-3">
-          <Select value={type} options={options} placeholder={"Quiz type"} />
+          <Select
+            options={options}
+            placeholder={"Quiz type"}
+            onChange={setType}
+            defaultValue={type}
+          />
         </div>
         <div className="more-actions form-group">
-          <label className="mb-3" onChange={(event) => handleChangeFile(event)}>
-            Upload image
-          </label>
-          <input type="file" className="form-control" />
+          <label className="mb-3">Upload image</label>
+          <input
+            type="file"
+            className="form-control"
+            onChange={(event) => handleChangeFile(event)}
+          />
+        </div>
+        <div className="mt-3">
+          <button
+            className="btn btn-warning"
+            onClick={() => handleSubmitQuiz()}
+          >
+            Save
+          </button>
         </div>
       </fieldset>
       <div className="list-detail">table</div>
