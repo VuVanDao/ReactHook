@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router-dom";
 import { FaRegPlusSquare } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PerfectScrollBar from "react-perfect-scrollbar";
 const Admin = () => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -21,8 +22,10 @@ const Admin = () => {
             {/* dong , mo sidebar */}
           </div>
           <div className="admin-main">
-            {/* noi chua route con cua admin */}
-            <Outlet />
+            <PerfectScrollBar>
+              {/* noi chua route con cua admin */}
+              <Outlet />
+            </PerfectScrollBar>
           </div>
         </div>
       </div>
