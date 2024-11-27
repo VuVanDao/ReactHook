@@ -13,7 +13,6 @@ const ModalUpdateQuiz = (props) => {
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-  console.log(">>>>dataupdate", dataUpdate);
 
   const handleClose = () => {
     setShow(false);
