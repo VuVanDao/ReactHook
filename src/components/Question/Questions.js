@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import "./Question.scss";
 import { BsFillPatchPlusFill, BsFillPatchMinusFill } from "react-icons/bs";
@@ -7,12 +7,29 @@ import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import {
+  getAllQuizForAdmin,
+  postCreateNewAnswerForQuestions,
+  postCreateNewQuestionForQuiz,
+} from "../../service/apiService";
 const Questions = (props) => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  const [listQuiz, setListQuiz] = useState([]);
+  useEffect(() => {
+    fetchQuiz();
+  }, []);
+  const fetchQuiz = async () => {
+    let res = await getAllQuizForAdmin();
+    if (res && res.EC === 0) {
+      let newQuiz = res.DT.map((item) => {
+        return {
+          value: item.id,
+          label: `${item.id}-${item.description}`,
+        };
+      });
+      setListQuiz(newQuiz);
+    }
+  };
+
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [dataImagePreview, setDataImagePreview] = useState({
@@ -144,8 +161,27 @@ const Questions = (props) => {
       setQuestions(questionsClone);
     }
   };
-  const handleSubmitQuestionForQuiz = () => {
-    console.log(">>", questions);
+  const handleSubmitQuestionForQuiz = async () => {
+    //submit questions
+    let resQuestions = await Promise.all(
+      questions.map(async (question) => {
+        const q = await postCreateNewQuestionForQuiz(
+          +selectedQuiz.value,
+          question.description,
+          question.imageFile
+        );
+        //submit answer
+        await Promise.all(
+          question.answers.map(async (answer) => {
+            await postCreateNewAnswerForQuestions(
+              answer.description,
+              answer.isCorrect,
+              q.DT.id
+            );
+          })
+        );
+      })
+    );
   };
   const handlePreviewImage = (questionId) => {
     let questionsClone = _.cloneDeep(questions);
@@ -162,13 +198,13 @@ const Questions = (props) => {
     <div className="questions-container">
       <div className="title">Manage Questions</div>
       <hr />
-      <div className="add-new-question">
+      <div className="add-new-question" style={{ zIndex: 10 }}>
         <div className="col-6 form-group">
           <label className="mb-2">Select Quiz</label>
           <Select
             defaultValue={selectedQuiz}
             onChange={setSelectedQuiz}
-            options={options}
+            options={listQuiz}
             className="form-control"
           />
         </div>
@@ -178,7 +214,7 @@ const Questions = (props) => {
           questions.length > 0 &&
           questions.map((item, index) => {
             return (
-              <div className="q-main mb-5" key={item.id}>
+              <div className="q-main mb-5" key={item.id} style={{ zIndex: 0 }}>
                 <div className="questions-content">
                   <div className="form-floating description ">
                     <input
@@ -190,7 +226,9 @@ const Questions = (props) => {
                         handleOnChange("QUESTION", item.id, event.target.value)
                       }
                     />
-                    <label>Questions {index + 1}'s Description</label>
+                    <label style={{ zIndex: 0 }}>
+                      Questions {index + 1}'s Description
+                    </label>
                   </div>
                   <div className="group-upload">
                     <label className="label-upload" htmlFor={`${item.id}`}>
@@ -269,7 +307,9 @@ const Questions = (props) => {
                               )
                             }
                           />
-                          <label>Answer {index + 1}</label>
+                          <label style={{ zIndex: 0 }}>
+                            Answer {index + 1}
+                          </label>
                         </div>
                         <div className="btn-group">
                           <span className="icon-add">
