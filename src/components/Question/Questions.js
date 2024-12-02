@@ -6,6 +6,7 @@ import { AiFillPlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
+import Lightbox from "react-awesome-lightbox";
 const Questions = (props) => {
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -13,6 +14,11 @@ const Questions = (props) => {
     { value: "vanilla", label: "Vanilla" },
   ];
   const [selectedQuiz, setSelectedQuiz] = useState({});
+  const [isPreviewImage, setIsPreviewImage] = useState(false);
+  const [dataImagePreview, setDataImagePreview] = useState({
+    title: "",
+    url: "",
+  });
   const [questions, setQuestions] = useState([
     {
       id: uuidv4(),
@@ -141,6 +147,17 @@ const Questions = (props) => {
   const handleSubmitQuestionForQuiz = () => {
     console.log(">>", questions);
   };
+  const handlePreviewImage = (questionId) => {
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
+    if (index > -1) {
+      setDataImagePreview({
+        url: URL.createObjectURL(questionsClone[index].imageFile),
+        title: questionsClone[index].imageName,
+      });
+      setIsPreviewImage(true);
+    }
+  };
   return (
     <div className="questions-container">
       <div className="title">Manage Questions</div>
@@ -156,6 +173,7 @@ const Questions = (props) => {
           />
         </div>
         <div className="my-3 mb-2">Add questions:</div>
+        {/* ds cac cau hoi */}
         {questions &&
           questions.length > 0 &&
           questions.map((item, index) => {
@@ -187,7 +205,13 @@ const Questions = (props) => {
                       }
                     />
                     <span>
-                      {item.imageName ? item.imageName : "Upload....."}
+                      {item.imageName ? (
+                        <span onClick={() => handlePreviewImage(item.id)}>
+                          {item.imageName}
+                        </span>
+                      ) : (
+                        <span>"Upload....."</span>
+                      )}
                     </span>
                   </div>
                   <div className="btn-add">
@@ -211,6 +235,7 @@ const Questions = (props) => {
                     )}
                   </div>
                 </div>
+                {/* ds cac cau tra loi */}
                 {item.answers &&
                   item.answers.length > 0 &&
                   item.answers.map((answers, index) => {
@@ -291,6 +316,13 @@ const Questions = (props) => {
               Save questions
             </button>
           </div>
+        )}
+        {isPreviewImage && (
+          <Lightbox
+            image={dataImagePreview.url}
+            title={dataImagePreview.title}
+            onClose={() => setIsPreviewImage(false)}
+          ></Lightbox>
         )}
       </div>
     </div>
