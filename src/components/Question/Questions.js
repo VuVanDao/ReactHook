@@ -12,6 +12,8 @@ import {
   postCreateNewAnswerForQuestions,
   postCreateNewQuestionForQuiz,
 } from "../../service/apiService";
+import { toast } from "react-toastify";
+
 const Questions = (props) => {
   const [listQuiz, setListQuiz] = useState([]);
   useEffect(() => {
@@ -36,7 +38,7 @@ const Questions = (props) => {
     title: "",
     url: "",
   });
-  const [questions, setQuestions] = useState([
+  const initQuestion = [
     {
       id: uuidv4(),
       description: "",
@@ -50,7 +52,8 @@ const Questions = (props) => {
         },
       ],
     },
-  ]);
+  ];
+  const [questions, setQuestions] = useState(initQuestion);
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
       const newQuestion = {
@@ -162,26 +165,85 @@ const Questions = (props) => {
     }
   };
   const handleSubmitQuestionForQuiz = async () => {
+    if (_.isEmpty(selectedQuiz)) {
+      toast.error("Plz choose a quiz to continue!!!");
+      return;
+    }
+    //validate answers
+    let isValidAnswer = true;
+    let indexQ = 0,
+      indexA = 0;
+    for (let i = 0; i < questions.length; i++) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (!questions[i].answers[j].description) {
+          isValidAnswer = false;
+          indexA = j;
+          break;
+        }
+      }
+      if (isValidAnswer === false) {
+        indexQ = i;
+        break;
+      }
+    }
+    if (isValidAnswer === false) {
+      toast.error(
+        `Plz fill description of answer at ${indexA + 1} , question ${
+          indexQ + 1
+        }`
+      );
+      return;
+    }
+    //validate questions
+    let isValidQuestion = true;
+    let indexQ1 = 0;
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].description) {
+        isValidQuestion = false;
+        indexQ1 = i;
+        break;
+      }
+    }
+    if (isValidQuestion === false) {
+      toast.error(`Plz fill description of question ${indexQ1 + 1}`);
+      return;
+    }
     //submit questions
-    let resQuestions = await Promise.all(
-      questions.map(async (question) => {
-        const q = await postCreateNewQuestionForQuiz(
-          +selectedQuiz.value,
-          question.description,
-          question.imageFile
+    //  await Promise.all(
+    //   questions.map(async (question) => {
+    //     const q = await postCreateNewQuestionForQuiz(
+    //       +selectedQuiz.value,
+    //       question.description,
+    //       question.imageFile
+    //     );
+    //     //submit answer
+    //     await Promise.all(
+    //       question.answers.map(async (answer) => {
+    //         await postCreateNewAnswerForQuestions(
+    //           answer.description,
+    //           answer.isCorrect,
+    //           q.DT.id
+    //         );
+    //       })
+    //     );
+    //   })
+    // );
+    for (const question of questions) {
+      const q = await postCreateNewQuestionForQuiz(
+        +selectedQuiz.value,
+        question.description,
+        question.imageFile
+      );
+      for (const answer of questions.answers) {
+        await postCreateNewAnswerForQuestions(
+          answer.description,
+          answer.isCorrect,
+          q.DT.id
         );
-        //submit answer
-        await Promise.all(
-          question.answers.map(async (answer) => {
-            await postCreateNewAnswerForQuestions(
-              answer.description,
-              answer.isCorrect,
-              q.DT.id
-            );
-          })
-        );
-      })
-    );
+      }
+      toast.success("Complete");
+      setQuestions(initQuestion);
+    }
   };
   const handlePreviewImage = (questionId) => {
     let questionsClone = _.cloneDeep(questions);
