@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import "./Question.scss";
+import "./QuizQA.scss";
 import { BsFillPatchPlusFill, BsFillPatchMinusFill } from "react-icons/bs";
 import { AiFillPlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { RiImageAddFill } from "react-icons/ri";
@@ -11,10 +11,10 @@ import {
   getAllQuizForAdmin,
   postCreateNewAnswerForQuestions,
   postCreateNewQuestionForQuiz,
-} from "../../service/apiService";
+} from "../../../../service/apiService";
 import { toast } from "react-toastify";
 
-const Questions = (props) => {
+const QuizQA = (props) => {
   const [listQuiz, setListQuiz] = useState([]);
   useEffect(() => {
     fetchQuiz();
@@ -260,8 +260,6 @@ const Questions = (props) => {
   };
   return (
     <div className="questions-container">
-      <div className="title">Manage Questions</div>
-      <hr />
       <div className="add-new-question" style={{ zIndex: 10 }}>
         <div className="col-6 form-group">
           <label className="mb-2">Select Quiz</label>
@@ -432,4 +430,4 @@ const Questions = (props) => {
     </div>
   );
 };
-export default Questions;
+export default QuizQA;
