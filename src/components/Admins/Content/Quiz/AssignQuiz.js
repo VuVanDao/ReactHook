@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import {
   getAllQuizForAdmin,
   getAllUserService,
+  postAssignQuiz,
 } from "../../../../service/apiService";
+import { toast } from "react-toastify";
 const AssignQuiz = (props) => {
   const [listQuiz, setListQuiz] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState({});
@@ -19,7 +21,7 @@ const AssignQuiz = (props) => {
       let newQuiz = res.DT.map((item) => {
         return {
           value: item.id,
-          label: `${item.id}-${item.description}`,
+          label: `${item.id}-${item.name}`,
         };
       });
       setListQuiz(newQuiz);
@@ -27,8 +29,6 @@ const AssignQuiz = (props) => {
   };
   const fetchUser = async () => {
     let res = await getAllUserService();
-    console.log(">>>", res);
-
     if (res && res.EC === 0) {
       let newQuiz = res.DT.map((item) => {
         return {
@@ -38,9 +38,16 @@ const AssignQuiz = (props) => {
       });
       setListUser(newQuiz);
     }
+    fetchQuiz();
   };
-  //   console.log(">>>", listUser);
-
+  const handleAssign = async () => {
+    let res = await postAssignQuiz(selectedQuiz.value, selectedUser.value);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+    } else {
+      toast.error(res.EM);
+    }
+  };
   return (
     <div className="assign-quiz-container row">
       <div className="col-6 form-group">
@@ -62,7 +69,9 @@ const AssignQuiz = (props) => {
         />
       </div>
       <div>
-        <button className="btn btn-warning mt-3">Assign</button>
+        <button className="btn btn-warning mt-3" onClick={() => handleAssign()}>
+          Assign
+        </button>
       </div>
     </div>
   );

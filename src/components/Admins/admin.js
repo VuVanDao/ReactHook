@@ -18,7 +18,10 @@ const Admin = () => {
         </div>
         <div className="admin-content">
           <div className="admin-header">
-            <FaBars onClick={() => setCollapsed(!collapsed)} />
+            <FaBars
+              onClick={() => setCollapsed(!collapsed)}
+              style={{ cursor: "pointer" }}
+            />
             {/* dong , mo sidebar */}
           </div>
           <div className="admin-main">
