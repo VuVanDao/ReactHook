@@ -261,10 +261,11 @@ const QuizQA = (props) => {
       quizId: selectedQuiz.value,
       questions: questionsClone,
     });
-    console.log(">>", res);
-
-    //  toast.success("Complete");
-    //  setQuestions(initQuestions);
+    if (res && res.EC == 0) {
+      toast.success(res.EM);
+      fetchQuizWithQA();
+    }
+    setQuestions(initQuestions);
   };
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
