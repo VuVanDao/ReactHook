@@ -10,7 +10,6 @@ const Question = (props) => {
     return <></>;
   }
   const handleHandleCheckBox = (event, aId, qId) => {
-    console.log(">>>", aId, qId);
     handleCheckBox(aId, qId);
   };
   return (

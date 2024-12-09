@@ -66,6 +66,13 @@
           background-color: #ff5563;
           color: white;
         }
+        &.selected {
+          background-color: #ff5563;
+          color: white;
+        }
+        &.clicked {
+          color: aqua;
+        }
       }
     }
   }
