@@ -3,22 +3,36 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../service/apiService";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { FaSpinner } from "react-icons/fa";
+import { doLogin } from "../../redux/action/userAction";
+import Languages from "../Header/Language";
 const Login = (props) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoadingData, setIsLoadingData] = useState(false);
+  const dispatch = useDispatch();
   const handleLogin = async () => {
     //validate
+    setIsLoadingData(true);
     //submit
     let data = await postLogin(email, password);
     if (data && +data.EC === 0) {
+      dispatch(doLogin(data));
       toast.success(data.EM);
-      navigate("/admins/manage-users");
+      setIsLoadingData(false);
+      navigate("/");
     } else {
       toast.error(data.EM);
+      setIsLoadingData(false);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event && event.keyCode === 13) {
+      handleLogin();
     }
   };
   return (
@@ -28,6 +42,7 @@ const Login = (props) => {
         <button className="btn btn-dark" onClick={() => navigate("/register")}>
           Sign up
         </button>
+        <Languages />
       </div>
       <div className="title col-4  mx-auto">VuVanDao</div>
       <div className="welcome col-4  mx-auto">Hello , Who are you?</div>
@@ -48,17 +63,20 @@ const Login = (props) => {
             className="form-control"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            onKeyDown={(event) => handleKeyDown(event)}
           />
         </div>
         <span className="forgot-password">Forgot password?</span>
-        <div>
-          <button
-            className="btn btn-submit btn-dark"
-            onClick={() => handleLogin()}
-          >
-            Login to Typeform
-          </button>
-        </div>
+
+        <button
+          className="btn btn-submit btn-dark"
+          onClick={() => handleLogin()}
+          disabled={isLoadingData}
+        >
+          {isLoadingData === true && <FaSpinner className="loaderIcon mx-1" />}
+          Login to Typeform
+        </button>
+
         <div className="back text-center">
           <span onClick={() => navigate("/")}>&#60;&#60; Go to home page</span>
         </div>
