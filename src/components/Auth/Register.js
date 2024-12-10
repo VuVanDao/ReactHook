@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { postRegister } from "../../service/apiService";
 import { toast } from "react-toastify";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import Languages from "../Header/Language";
 const Register = (props) => {
   const navigate = useNavigate();
 
@@ -21,9 +22,6 @@ const Register = (props) => {
     } else {
       toast.error(data.EM);
     }
-    console.log("<<>>>>", email);
-
-    console.log("><><", data);
   };
 
   return (
@@ -33,6 +31,7 @@ const Register = (props) => {
         <button className="btn btn-dark" onClick={() => navigate("/login")}>
           Login
         </button>
+        <Languages />
       </div>
       <div className="register-title col-4  mx-auto">VuVanDao</div>
       <div className="register-welcome col-4  mx-auto">

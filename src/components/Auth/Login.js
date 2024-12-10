@@ -3,10 +3,11 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../service/apiService";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FaSpinner } from "react-icons/fa";
 import { doLogin } from "../../redux/action/userAction";
+import Languages from "../Header/Language";
 const Login = (props) => {
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const Login = (props) => {
     }
   };
   const handleKeyDown = (event) => {
-    if (event && event.keycode === 13) {
+    if (event && event.keyCode === 13) {
       handleLogin();
     }
   };
@@ -41,6 +42,7 @@ const Login = (props) => {
         <button className="btn btn-dark" onClick={() => navigate("/register")}>
           Sign up
         </button>
+        <Languages />
       </div>
       <div className="title col-4  mx-auto">VuVanDao</div>
       <div className="welcome col-4  mx-auto">Hello , Who are you?</div>
@@ -61,6 +63,7 @@ const Login = (props) => {
             className="form-control"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            onKeyDown={(event) => handleKeyDown(event)}
           />
         </div>
         <span className="forgot-password">Forgot password?</span>
@@ -69,7 +72,6 @@ const Login = (props) => {
           className="btn btn-submit btn-dark"
           onClick={() => handleLogin()}
           disabled={isLoadingData}
-          onKeyDown={(event) => handleKeyDown(event)}
         >
           {isLoadingData === true && <FaSpinner className="loaderIcon mx-1" />}
           Login to Typeform
