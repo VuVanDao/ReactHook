@@ -29,6 +29,11 @@ const Login = (props) => {
       setIsLoadingData(false);
     }
   };
+  const handleKeyDown = (event) => {
+    if (event && event.keycode === 13) {
+      handleLogin();
+    }
+  };
   return (
     <div className="login-container">
       <div className="header">
@@ -64,6 +69,7 @@ const Login = (props) => {
           className="btn btn-submit btn-dark"
           onClick={() => handleLogin()}
           disabled={isLoadingData}
+          onKeyDown={(event) => handleKeyDown(event)}
         >
           {isLoadingData === true && <FaSpinner className="loaderIcon mx-1" />}
           Login to Typeform
