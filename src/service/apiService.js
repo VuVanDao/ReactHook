@@ -108,6 +108,21 @@ const logout = (email, refresh_token) => {
 const getOverView = () => {
   return axios.get(`api/v1/overview`);
 };
+const changePassword = (current_password, new_password) => {
+  return axios.post(`/api/v1/change-password`, {
+    current_password,
+    new_password,
+  });
+};
+const updateProfile = (username, userImage) => {
+  const data = new FormData();
+  data.append("username", username);
+  data.append("userImage", userImage);
+  return axios.post("api/v1/profile", data);
+};
+const getHistory = () => {
+  return axios.get(`api/v1/history`);
+};
 export {
   postCreateNewUser,
   getAllUserService,
@@ -130,4 +145,7 @@ export {
   postUpsertQA,
   logout,
   getOverView,
+  changePassword,
+  updateProfile,
+  getHistory,
 };

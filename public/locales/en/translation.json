@@ -130,5 +130,14 @@
         "preview": "Preview Image"
       }
     }
+  },
+  "HeaderModal": {
+    "main-info": "Main info",
+    "password-info": "Change password",
+    "change-password": {
+      "current-password": "Current password",
+      "new-password": "New password"
+    },
+    "history": "History"
   }
 }

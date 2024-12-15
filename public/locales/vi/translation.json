@@ -130,5 +130,14 @@
         "preview": "Xem chi tiết"
       }
     }
+  },
+  "HeaderModal": {
+    "main-info": "Thông tin",
+    "password-info": "Đổi mật khẩu",
+    "change-password": {
+      "current-password": "Mật khẩu cũ",
+      "new-password": "Mật khẩu mới"
+    },
+    "history": "Lịch sử hoạt động"
   }
 }
