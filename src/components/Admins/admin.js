@@ -9,8 +9,10 @@ import "react-toastify/dist/ReactToastify.css";
 import PerfectScrollBar from "react-perfect-scrollbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Languages from "../Header/Language";
-
+import { useTranslation, Trans } from "react-i18next";
 const Admin = () => {
+  const { t } = useTranslation();
+
   const [collapsed, setCollapsed] = useState(false);
   const handleLogOut = () => {};
   return (
@@ -29,14 +31,16 @@ const Admin = () => {
             <div className="right-side">
               <Languages />
               <NavDropdown
-                title="Settings"
+                title={t("header.settings.settings")}
                 id="basic-nav-dropdown"
                 className="mx-5"
               >
-                <NavDropdown.Item href="#action/3.4">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4">
+                  {t("header.settings.profile")}
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleLogOut()}>
-                  Log out
+                  {t("header.settings.logout")}
                 </NavDropdown.Item>
               </NavDropdown>
             </div>

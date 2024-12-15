@@ -22,7 +22,9 @@ const HomePage = () => {
           </div>
         ) : (
           <div className="title-3">
-            <button onClick={() => navigate("/users")}>Doing Quiz Now</button>
+            <button onClick={() => navigate("/users")}>
+              {t("homepage.title3.login1")}
+            </button>
           </div>
         )}
       </div>

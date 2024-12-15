@@ -11,8 +11,10 @@ import {
   getUserWithPaginate,
 } from "../../../service/apiService";
 import TableUserPaginate from "./TableUserPaginate";
+import { useTranslation, Trans } from "react-i18next";
 
 const ManageUser = (props) => {
+  const { t } = useTranslation();
   const LIMIT_USER = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
@@ -38,7 +40,6 @@ const ManageUser = (props) => {
   const fetchListUserWithPaginate = async (page) => {
     let res = await getUserWithPaginate(page, LIMIT_USER);
     if (res.EC === 0) {
-      console.log("res", res.DT);
       setListUser(res.DT.users);
       setPageCount(res.DT.totalPages);
     }
@@ -62,7 +63,7 @@ const ManageUser = (props) => {
   };
   return (
     <div className="manage-user-container">
-      <div className="title">Manage User</div>
+      <div className="title">{t("manager-user.title")}</div>
       <div className="users-content">
         <div>
           <button
@@ -70,7 +71,7 @@ const ManageUser = (props) => {
             onClick={() => setShowModalCreateUser(true)}
           >
             <FcPlus />
-            Add new user
+            {t("manager-user.btn-add")}
           </button>
         </div>
         <div className="table-users-container">

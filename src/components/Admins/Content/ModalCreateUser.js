@@ -5,7 +5,10 @@ import { FaRegPlusSquare } from "react-icons/fa";
 import React from "react";
 import { toast } from "react-toastify";
 import { postCreateNewUser } from "../../../service/apiService";
+import { useTranslation, Trans } from "react-i18next";
+
 const ModalCreateUser = (props) => {
+  const { t } = useTranslation();
   const {
     show,
     setShow,
@@ -78,10 +81,6 @@ const ModalCreateUser = (props) => {
   };
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-
       <Modal
         show={show}
         onHide={handleClose}
@@ -90,7 +89,7 @@ const ModalCreateUser = (props) => {
         className="modal-add-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add new user</Modal.Title>
+          <Modal.Title> {t("manager-user.modal.create.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -104,7 +103,9 @@ const ModalCreateUser = (props) => {
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Password</label>
+              <label className="form-label">
+                {t("manager-user.modal.create.password")}
+              </label>
               <input
                 type="password"
                 className="form-control"
@@ -114,7 +115,9 @@ const ModalCreateUser = (props) => {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">UserName</label>
+              <label className="form-label">
+                {t("manager-user.modal.create.username")}
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -123,15 +126,21 @@ const ModalCreateUser = (props) => {
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Role</label>
+              <label className="form-label">
+                {t("manager-user.modal.create.role")}
+              </label>
               <select
                 id="inputState"
                 className="form-select"
                 onChange={(event) => setRole(event.target.value)}
                 value={role}
               >
-                <option value="USER">USER...</option>
-                <option value="ADMIN">ADMIN...</option>
+                <option value="USER">
+                  {t("manager-user.modal.create.role-option.user")}...
+                </option>
+                <option value="ADMIN">
+                  {t("manager-user.modal.create.role-option.admin")}...
+                </option>
                 <option>...</option>
               </select>
             </div>
@@ -140,7 +149,7 @@ const ModalCreateUser = (props) => {
               <label className="form-label label-upload" htmlFor="labelUpload">
                 <span>
                   <FaRegPlusSquare />
-                  Upload File Image
+                  {t("manager-user.modal.create.image")}
                 </span>
               </label>
               <input
@@ -155,7 +164,7 @@ const ModalCreateUser = (props) => {
               {previewImage ? (
                 <img src={previewImage} />
               ) : (
-                <span>preview image</span>
+                <span>{t("manager-user.modal.create.preview")}</span>
               )}
             </div>
           </form>

@@ -3,7 +3,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { deleteUserService } from "../../../service/apiService";
 import { toast } from "react-toastify";
+import { useTranslation, Trans } from "react-i18next";
+
 const ModalDeleteUser = (props) => {
+  const { t } = useTranslation();
   const {
     show,
     setShow,

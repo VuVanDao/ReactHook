@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { getAllUserService } from "../../../service/apiService";
+// import { useEffect, useState } from "react";
+// import { getAllUserService } from "../../../service/apiService";
 import ReactPaginate from "react-paginate";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import { useTranslation, Trans } from "react-i18next";
 
 const TableUserPaginate = (props) => {
+  const { t } = useTranslation();
+
   const {
     listUser,
     handleClickBtnUpdate,
@@ -28,12 +31,12 @@ const TableUserPaginate = (props) => {
       <table className="table table-hover table-hovered">
         <thead>
           <tr>
-            <th scope="col">Nol.</th>
-            <th scope="col">UserName</th>
+            <th scope="col">{t("manager-user.table.nol")}</th>
+            <th scope="col">{t("manager-user.table.username")}</th>
             <th scope="col">Email</th>
-            <th scope="col">Role</th>
+            <th scope="col">{t("manager-user.table.role")}</th>
             <th scope="col" style={{ textAlign: "center" }}>
-              action
+              {t("manager-user.table.action")}
             </th>
           </tr>
         </thead>
@@ -52,19 +55,19 @@ const TableUserPaginate = (props) => {
                       className="btn btn-secondary"
                       onClick={() => handleClickBtnView(item)}
                     >
-                      View
+                      {t("manager-user.table.btn-action.view")}
                     </button>
                     <button
                       className="btn btn-warning mx-3"
                       onClick={() => handleClickBtnUpdate(item)}
                     >
-                      Update
+                      {t("manager-user.table.btn-action.update")}
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleClickBtnDelete(item)}
                     >
-                      Delete
+                      {t("manager-user.table.btn-action.delete")}
                     </button>
                   </td>
                 </tr>

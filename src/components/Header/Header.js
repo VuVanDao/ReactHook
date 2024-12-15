@@ -10,11 +10,15 @@ import { logout } from "../../service/apiService";
 import { toast } from "react-toastify";
 import { doLogout } from "../../redux/action/userAction";
 import Languages from "./Language";
+import { useTranslation, Trans } from "react-i18next";
+
 const Header = () => {
+  const { t } = useTranslation();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
-  const dispatch = useDispatch();
   console.log(">>", account);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate("/login");
@@ -30,7 +34,6 @@ const Header = () => {
     } else {
       toast.error(res.EM);
     }
-    console.log(">>", res);
   };
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -42,13 +45,13 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to="/" className="nav-link">
-              Home
+              {t("header.home")}
             </NavLink>
             <NavLink to="users" className="nav-link">
-              User
+              {t("header.user")}
             </NavLink>
             <NavLink to="admins" className="nav-link">
-              Admin
+              {t("header.admin")}
             </NavLink>
           </Nav>
 
@@ -56,36 +59,38 @@ const Header = () => {
             <Form className="d-flex">
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder={t("header.search.search")}
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button variant="outline-success">
+                {t("header.search.btn-search")}
+              </Button>
             </Form>
           </Nav>
           <Nav>
             {isAuthenticated === false ? (
               <>
                 <button className="btn-login" onClick={() => handleLogin()}>
-                  Log in
+                  {t("header.login.login")}
                 </button>
                 <button className="btn-signup" onClick={() => handleRegister()}>
-                  Sign up
+                  {t("header.login.sign-up")}
                 </button>
               </>
             ) : (
               <>
                 <NavDropdown
-                  title="Settings"
+                  title={t("header.settings.settings")}
                   id="basic-nav-dropdown"
                   className="mx-5"
                 >
                   <NavDropdown.Item href="#action/3.4">
-                    Profile
+                    {t("header.settings.profile")}
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={() => handleLogOut()}>
-                    Log out
+                    {t("header.settings.logout")}
                   </NavDropdown.Item>
                 </NavDropdown>
               </>
