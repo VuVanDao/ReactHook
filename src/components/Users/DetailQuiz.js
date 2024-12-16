@@ -15,6 +15,8 @@ const DetailQuiz = (props) => {
   const location = useLocation();
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
+  const [isSubmitQuiz, setIsSubmitQuiz] = useState(false);
+  const [isShowAnswer, setIsShowAnswer] = useState(false);
   const [isShowModalResult, setIsShowModalResult] = useState(false);
   const [dataModalResult, setDataModalResult] = useState({});
   useEffect(() => {
@@ -105,18 +107,51 @@ const DetailQuiz = (props) => {
       payload.answers = answers;
       //submit api
       let res = await postSubmitQuiz(payload);
-      console.log(">>>check res", res);
       if (res && res.EC === 0) {
+        setIsSubmitQuiz(true);
         setDataModalResult({
           countCorrect: res.DT.countCorrect,
           countTotal: res.DT.countTotal,
           quizData: res.DT.quizData,
         });
         setIsShowModalResult(true);
+        console.log(">>res", res);
+
+        //update DataQuiz with correct answer
+        if (res.DT && res.DT.quizData) {
+          let dataQuizClone = _.cloneDeep(dataQuiz);
+          console.log("<<<dataQuizCLone", dataQuizClone);
+
+          let a = res.DT.quizData;
+          for (let q of a) {
+            for (let i = 0; i < dataQuizClone.length; i++) {
+              if (+q.questionId === +dataQuizClone[i].QuestionId) {
+                //update answer
+                let newAnswers = [];
+                for (let j = 0; j < dataQuizClone[i].answers.length; j++) {
+                  let s = q.systemAnswers.find(
+                    (item) => +item.id === +dataQuizClone[i].answers[j].id
+                  );
+                  if (s) {
+                    dataQuizClone[i].answers[j].isCorrect = true;
+                  }
+                  newAnswers.push(dataQuizClone[i].answers[j]);
+                }
+                dataQuizClone[i].answers = newAnswers;
+              }
+            }
+          }
+          setDataQuiz(dataQuizClone);
+        }
       } else {
         console.log("something wrong");
       }
     }
+  };
+
+  const handleShowAnswer = () => {
+    if (!isSubmitQuiz) return;
+    setIsShowAnswer(true);
   };
   return (
     <>
@@ -142,6 +177,8 @@ const DetailQuiz = (props) => {
             <Question
               index={index}
               handleCheckBox={handleCheckBox}
+              isShowAnswer={isShowAnswer}
+              isSubmitQuiz={isSubmitQuiz}
               data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
             />
           </div>
@@ -152,7 +189,11 @@ const DetailQuiz = (props) => {
             <button className="btn btn-primary " onClick={() => handleNext()}>
               {t("listquiz.next")}
             </button>
-            <button className="btn btn-warning " onClick={() => handleFinish()}>
+            <button
+              className="btn btn-warning "
+              onClick={() => handleFinish()}
+              disabled={isSubmitQuiz}
+            >
               {t("listquiz.finish")}
             </button>
           </div>
@@ -169,6 +210,7 @@ const DetailQuiz = (props) => {
           setShow={setIsShowModalResult}
           dataModalResult={dataModalResult}
           setDataModalResult={setDataModalResult}
+          handleShowAnswer={handleShowAnswer}
         />
       </div>
     </>
