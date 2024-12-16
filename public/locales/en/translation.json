@@ -1,0 +1,143 @@
+{
+  "homepage": {
+    "title1": " There's a better way to ask",
+    "title2": " You don't want to make a boring form. And your audience won't answerone. Create a typeform instead-and make everyone happy",
+    "title3": {
+      "login": "Get's started, It's free",
+      "login1": "Doing Quiz Now"
+    }
+  },
+  "header": {
+    "home": "Home",
+    "user": "User",
+    "admin": "Admin",
+    "search": {
+      "search": "Search",
+      "btn-search": "search"
+    },
+    "login": {
+      "login": "login",
+      "sign-up": "Sign up"
+    },
+    "settings": {
+      "settings": "Settings",
+      "profile": "Profile",
+      "logout": "Log out"
+    }
+  },
+  "login": {
+    "check": "Dont hanve account yet?",
+    "login": {
+      "sign-up": "Sign up",
+      "login": "Login to Typeform"
+    },
+    "title": "Hello, How are you",
+    "password": "password",
+    "password-forgot": "Forgot password ?",
+    "back": "Back to homePage"
+  },
+  "singup": {
+    "check": "Already have an account???",
+    "login": "Login",
+    "title": "Get better data with conversational forms, surveys, quizzes & more.",
+    "username": "UserName",
+    "password": "password",
+    "password-hide": "Hide password",
+    "password-show": "Show password",
+    "password-forgot": "Forgot password ?",
+    "register": "Register to Typeform",
+    "back": "Back to homePage"
+  },
+  "listquiz": {
+    "title": "Quiz",
+    "btn": "start",
+    "question": "Question",
+    "prev": "Prev",
+    "next": "next",
+    "finish": "finish"
+  },
+  "sidebar": {
+    "new": "new",
+    "dashboard": "DashBoard",
+    "Components": "Components",
+    "feature": "Features",
+    "list-features": {
+      "manager-user": "Manager User",
+      "manager-quiz": "manager-quiz",
+      "manager-question": "manager-question"
+    }
+  },
+  "dashboard": {
+    "total-user": "Total users",
+    "total-quizzes": "Total quizzes",
+    "total-question": "Total questions",
+    "total-answer": "Total answers",
+    "data": {
+      "quizzes": "Quizzes",
+      "questions": "Questions",
+      "answers": "Answers"
+    }
+  },
+  "manager-user": {
+    "title": "Manage User",
+    "btn-add": "Add new user",
+    "table": {
+      "nol": "Nol.",
+      "username": "UserName",
+      "role": "Role",
+      "action": "action",
+      "btn-action": {
+        "view": "View",
+        "update": "Update",
+        "delete": "delete"
+      }
+    },
+    "modal": {
+      "create": {
+        "title": "Add new user",
+        "password": "Password",
+        "username": "UserName",
+        "role": "Role",
+        "role-option": {
+          "user": "User",
+          "admin": "Admin"
+        },
+        "image": "Upload File Image",
+        "preview": "Preview Image"
+      },
+      "view": {
+        "title": "View info user",
+        "password": "Password",
+        "username": "UserName",
+        "role": "Role",
+        "role-option": {
+          "user": "User",
+          "admin": "Admin"
+        },
+        "image": "Upload File Image",
+        "preview": "Preview Image"
+      },
+      "update": {
+        "title": "View info user",
+        "password": "Password",
+        "username": "UserName",
+        "role": "Role",
+        "role-option": {
+          "user": "User",
+          "admin": "Admin"
+        },
+        "image": "Upload File Image",
+        "preview": "Preview Image"
+      }
+    }
+  },
+  "HeaderModal": {
+    "main-info": "Main info",
+    "password-info": "Change password",
+    "change-password": {
+      "current-password": "Current password",
+      "new-password": "New password"
+    },
+    "history": "History"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "homepage": {
+    "title1": "Thực ra có rất nhiều cách để tìm hiểu",
+    "title2": "Bạn không muốn tạo 1 form trông nhàm chán, khiến khán giả không thấy hứng thứ. Hãy để type-form giúp bạn và cùng làm mọi người vui vẻ",
+    "title3": {
+      "login": "Bắt đầu thôi, hoàn toàn miễn phí",
+      "login1": "Làm thử ngay"
+    }
+  },
+  "header": {
+    "home": "Trang chủ",
+    "user": "Người dùng",
+    "admin": "Quản trị viên",
+    "search": {
+      "search": "Tìm kiếm",
+      "btn-search": "Tìm"
+    },
+    "login": {
+      "login": "Đăng nhập",
+      "sign-up": "Đăng kí"
+    },
+    "settings": {
+      "settings": "Cài đặt",
+      "profile": "Thông tin",
+      "logout": "Đăng xuất"
+    }
+  },
+  "login": {
+    "check": "Chưa có tài khoản?",
+    "login": {
+      "sign-up": "Đăng kí",
+      "login": "Đăng nhập vào Typeform"
+    },
+    "title": "Xin chào, bạn khoẻ không",
+    "password": "mật khẩu",
+    "password-forgot": "Quên mật khẩu ?",
+    "back": "Trở về trang chủ"
+  },
+  "singup": {
+    "check": "Có tài khoản rồi ???",
+    "login": "Đăng nhập",
+    "title": "Thu thập dữ liệu tốt hơn bằng các biểu mẫu đàm thoại, khảo sát, câu đố và nhiều hơn nữa.",
+    "username": "Tên người dùng",
+    "password": "mật khẩu",
+    "password-hide": "Che mật khẩu",
+    "password-show": "Hiện mật khẩu",
+    "password-forgot": "Quên mật khẩu?",
+    "register": "Đăng kí vào Typeform",
+    "back": "Trở về trang chủ"
+  },
+  "listquiz": {
+    "title": "Đề",
+    "btn": "Bắt đầu",
+    "question": "Câu hỏi",
+    "prev": "Trước",
+    "next": "Tiếp",
+    "finish": "Hoàn thành"
+  },
+  "sidebar": {
+    "new": "Mới",
+    "dashboard": "Thống kê",
+    "Components": "Components",
+    "feature": "Tính năng",
+    "list-features": {
+      "manager-user": "Quản lí người dùng",
+      "manager-quiz": "Quản lí đề",
+      "manager-question": "Quản lí câu hỏi"
+    }
+  },
+  "dashboard": {
+    "total-user": "Tổng người dùng",
+    "total-quizzes": "Tổng đề bài",
+    "total-question": "Tổng câu hỏi",
+    "total-answer": "Tổng câu trả lời",
+    "data": {
+      "quizzes": "Đề bài",
+      "questions": "Câu hỏi",
+      "answers": "Câu trả lời"
+    }
+  },
+  "manager-user": {
+    "title": "Quản lí người dùng",
+    "btn-add": "Thêm mới",
+    "table": {
+      "nol": "STT.",
+      "username": "Tên người dùng",
+      "role": "Quyền",
+      "action": "Hành động",
+      "btn-action": {
+        "view": "Xem",
+        "update": "Cập nhật",
+        "delete": "Xoá"
+      }
+    },
+    "modal": {
+      "create": {
+        "title": "Thêm mới người dùng",
+        "password": "Mật khẩu",
+        "username": "Tên người dùng",
+        "role": "Quyền",
+        "role-option": {
+          "user": "Người dùng",
+          "admin": "Quản trị viên"
+        },
+        "image": "Chọn ảnh",
+        "preview": "Xem chi tiết"
+      },
+      "view": {
+        "title": "Thông tin chi tiết người dùng",
+        "password": "Mật khẩu",
+        "username": "Tên người dùng",
+        "role": "Quyền",
+        "role-option": {
+          "user": "Người dùng",
+          "admin": "Quản trị viên"
+        },
+        "image": "Chọn ảnh",
+        "preview": "Xem chi tiết"
+      },
+      "update": {
+        "title": "Cập nhật thông tin người dùng",
+        "password": "Mật khẩu",
+        "username": "Tên người dùng",
+        "role": "Quyền",
+        "role-option": {
+          "user": "Người dùng",
+          "admin": "Quản trị viên"
+        },
+        "image": "Chọn ảnh",
+        "preview": "Xem chi tiết"
+      }
+    }
+  },
+  "HeaderModal": {
+    "main-info": "Thông tin",
+    "password-info": "Đổi mật khẩu",
+    "change-password": {
+      "current-password": "Mật khẩu cũ",
+      "new-password": "Mật khẩu mới"
+    },
+    "history": "Lịch sử hoạt động"
+  }
+}

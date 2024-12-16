@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { postRegister } from "../../service/apiService";
 import { toast } from "react-toastify";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import Languages from "../Header/Language";
+import { useTranslation, Trans } from "react-i18next";
+
 const Register = (props) => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,26 +24,22 @@ const Register = (props) => {
     } else {
       toast.error(data.EM);
     }
-    console.log("<<>>>>", email);
-
-    console.log("><><", data);
   };
 
   return (
     <div className="register-container">
       <div className="register-header">
-        <span>Already have an account?</span>
+        <span className="mx-2">{t("singup.check")}</span>
         <button className="btn btn-dark" onClick={() => navigate("/login")}>
-          Login
+          {t("singup.login")}
         </button>
+        <Languages />
       </div>
       <div className="register-title col-4  mx-auto">VuVanDao</div>
-      <div className="register-welcome col-4  mx-auto">
-        Get better data with conversational forms, surveys, quizzes & more.
-      </div>
+      <div className="register-welcome col-4  mx-auto">{t("singup.title")}</div>
       <div className="register-content-form col-4 mx-auto">
         <div className="form-group">
-          <label>UserName:</label>
+          <label> {t("singup.username")}:</label>
           <input
             type={"text"}
             className="form-control"
@@ -49,7 +48,7 @@ const Register = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>Email</label>
+          <label>Email (*)</label>
           <input
             type={"email"}
             className="form-control"
@@ -58,7 +57,10 @@ const Register = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>password</label>
+          <label>
+            {t("singup.password")}
+            (*)
+          </label>
           <input
             type={passwordChecked === true ? "password" : "text"}
             className="form-control"
@@ -70,28 +72,30 @@ const Register = (props) => {
               className="check-password"
               onClick={() => setPasswordChecked(!passwordChecked)}
             >
-              <FaEye /> Show password
+              <FaEye /> {t("singup.password-show")}
             </span>
           ) : (
             <span
               className="check-password my-3"
               onClick={() => setPasswordChecked(!passwordChecked)}
             >
-              <FaEyeSlash /> Hide password
+              <FaEyeSlash /> {t("singup.password-hide")}
             </span>
           )}
         </div>
-        <span className="forgot-password">Forgot password?</span>
+        <span className="forgot-password"> {t("singup.password-forgot")}</span>
         <div>
           <button
             className="btn btn-submit btn-dark"
             onClick={() => handleLogin()}
           >
-            Register to Typeform
+            {t("singup.register")}
           </button>
         </div>
         <div className="back text-center">
-          <span onClick={() => navigate("/")}>&#60;&#60; Go to home page</span>
+          <span onClick={() => navigate("/")}>
+            &#60;&#60; {t("singup.back")}
+          </span>
         </div>
       </div>
     </div>

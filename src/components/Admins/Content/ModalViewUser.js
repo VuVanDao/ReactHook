@@ -6,8 +6,10 @@ import React from "react";
 import { toast } from "react-toastify";
 import { putUpdateUser } from "../../../service/apiService";
 import _ from "lodash";
+import { useTranslation, Trans } from "react-i18next";
 const ModalViewUser = (props) => {
   const { show, setShow, fetchListUser, dataUpdate, resetUpdateData } = props;
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setShow(false);
@@ -66,7 +68,7 @@ const ModalViewUser = (props) => {
         className="modal-add-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>View a user</Modal.Title>
+          <Modal.Title>{t("manager-user.modal.view.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -81,7 +83,9 @@ const ModalViewUser = (props) => {
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Password</label>
+              <label className="form-label">
+                {t("manager-user.modal.view.password")}
+              </label>
               <input
                 disabled
                 type="password"
@@ -92,7 +96,9 @@ const ModalViewUser = (props) => {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">UserName</label>
+              <label className="form-label">
+                {t("manager-user.modal.view.username")}
+              </label>
               <input
                 disabled
                 type="text"
@@ -102,7 +108,9 @@ const ModalViewUser = (props) => {
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Role</label>
+              <label className="form-label">
+                {t("manager-user.modal.view.role")}
+              </label>
               <select
                 disabled
                 id="inputState"
@@ -110,8 +118,12 @@ const ModalViewUser = (props) => {
                 // onChange={(event) => setRole(event.target.value)}
                 value={role}
               >
-                <option value="USER">USER...</option>
-                <option value="ADMIN">ADMIN...</option>
+                <option value="USER">
+                  {t("manager-user.modal.view.role-option.user")}...
+                </option>
+                <option value="ADMIN">
+                  {t("manager-user.modal.view.role-option.admin")}...
+                </option>
                 <option>...</option>
               </select>
             </div>
@@ -120,7 +132,7 @@ const ModalViewUser = (props) => {
               <label className="form-label label-upload" htmlFor="labelUpload">
                 <span>
                   <FaRegPlusSquare />
-                  Upload File Image
+                  {t("manager-user.modal.view.image")}
                 </span>
               </label>
               <input
@@ -136,7 +148,7 @@ const ModalViewUser = (props) => {
               {previewImage ? (
                 <img src={previewImage} />
               ) : (
-                <span>preview image</span>
+                <span>{t("manager-user.modal.view.preview")}</span>
               )}
             </div>
           </form>

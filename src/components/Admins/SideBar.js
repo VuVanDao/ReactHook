@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ProSidebar,
   Menu,
@@ -22,7 +22,12 @@ import sidebarBg from "../../assets/bg2.jpg";
 import "react-pro-sidebar/dist/css/styles.css";
 import { AiFillAccountBook } from "react-icons/ai";
 import "./SideBar.scss";
+import { useTranslation, Trans } from "react-i18next";
+
 const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
+  const Navigate = useNavigate();
+  const { t } = useTranslation();
+
   return (
     <>
       <ProSidebar
@@ -47,7 +52,9 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
             }}
           >
             <AiFillAccountBook size={"3em"} />
-            VanDao HeHe
+            <span onClick={() => Navigate("/")} style={{ cursor: "pointer" }}>
+              VanDao HeHe
+            </span>
           </div>
         </SidebarHeader>
 
@@ -55,13 +62,13 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
           <Menu iconShape="circle">
             <MenuItem
               icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">new</span>}
+              suffix={<span className="badge red">{t("sidebar.new")}</span>}
             >
-              dashboard
+              {t("sidebar.dashboard")}
               <Link to="/admins" />
             </MenuItem>
             <MenuItem icon={<FaGem />}>
-              components
+              {t("sidebar.Components")}
               <Link to="/" />
             </MenuItem>
           </Menu>
@@ -69,16 +76,22 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
             <SubMenu
               suffix={<span className="badge yellow">3</span>}
               icon={<FaGem />}
-              title={"Feature"}
+              title={t("sidebar.feature")}
             >
               <MenuItem>
-                Quản lí User <Link to="/admins/manage-users" />
+                {t("sidebar.list-features.manager-user")}
+                <Link to="/admins/manage-users" />
               </MenuItem>
               <MenuItem>
-                Quản lí Bài Quiz
-                <Link to="/admins/login" />
+                {t("sidebar.list-features.manager-quiz")}
+
+                <Link to="/admins/manage-quizzes" />
               </MenuItem>
-              <MenuItem> Quản lí Câu hỏi</MenuItem>
+              <MenuItem>
+                {t("sidebar.list-features.manager-question")}
+
+                <Link to="/admins/manage-questions" />
+              </MenuItem>
 
               <MenuItem>
                 den trang login

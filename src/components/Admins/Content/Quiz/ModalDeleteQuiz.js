@@ -1,30 +1,17 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { deleteUserService } from "../../../service/apiService";
 import { toast } from "react-toastify";
-import { useTranslation, Trans } from "react-i18next";
-
-const ModalDeleteUser = (props) => {
-  const { t } = useTranslation();
-  const {
-    show,
-    setShow,
-    fetchListUser,
-    dataDelete,
-    resetUpdateData,
-    fetchListUserWithPaginate,
-    currentPage,
-    setCurrentPage,
-  } = props;
+import { deleteQuiz } from "../../../../service/apiService";
+const ModalDeleteQuiz = (props) => {
+  const { show, setShow, fetchQuiz, dataDelete, resetUpdateData } = props;
 
   const handleClose = () => setShow(false);
   const handleSubmitDeleteUser = async () => {
-    let data = await deleteUserService(dataDelete.id);
+    let data = await deleteQuiz(dataDelete.id);
     if (data && data.EC == 0) {
       toast.success(data.EM);
-      await fetchListUserWithPaginate(currentPage);
-      setCurrentPage(currentPage);
+      await fetchQuiz();
       handleClose();
     } else {
       toast.error(data.EM);
@@ -37,8 +24,11 @@ const ModalDeleteUser = (props) => {
           <Modal.Title>Delete a user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Confirm Delete user with email:
-          {dataDelete && dataDelete.email ? dataDelete.email : ""}
+          Confirm Delete quiz :<br />
+          {dataDelete.name ? dataDelete.name : "hehe"}
+          <br />
+          Description:
+          {dataDelete?.description ? dataDelete.description : "hihi"}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -53,4 +43,4 @@ const ModalDeleteUser = (props) => {
   );
 };
 
-export default ModalDeleteUser;
+export default ModalDeleteQuiz;

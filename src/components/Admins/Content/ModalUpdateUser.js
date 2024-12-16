@@ -6,7 +6,11 @@ import React from "react";
 import { toast } from "react-toastify";
 import { putUpdateUser } from "../../../service/apiService";
 import _ from "lodash";
+import { useTranslation, Trans } from "react-i18next";
+
 const ModalUpdateUser = (props) => {
+  const { t } = useTranslation();
+
   const {
     show,
     setShow,
@@ -28,7 +32,6 @@ const ModalUpdateUser = (props) => {
     setPreviewImage("");
     resetUpdateData({});
   };
-  const handleShow = () => setShow(true);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -77,7 +80,7 @@ const ModalUpdateUser = (props) => {
         className="modal-add-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update a user</Modal.Title>
+          <Modal.Title>{t("manager-user.modal.update.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -92,7 +95,9 @@ const ModalUpdateUser = (props) => {
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Password</label>
+              <label className="form-label">
+                {t("manager-user.modal.update.password")}
+              </label>
               <input
                 disabled
                 type="password"
@@ -103,7 +108,9 @@ const ModalUpdateUser = (props) => {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">UserName</label>
+              <label className="form-label">
+                {t("manager-user.modal.update.username")}
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -112,15 +119,21 @@ const ModalUpdateUser = (props) => {
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Role</label>
+              <label className="form-label">
+                {t("manager-user.modal.update.role")}
+              </label>
               <select
                 id="inputState"
                 className="form-select"
                 onChange={(event) => setRole(event.target.value)}
                 value={role}
               >
-                <option value="USER">USER...</option>
-                <option value="ADMIN">ADMIN...</option>
+                <option value="USER">
+                  {t("manager-user.modal.update.role-option.user")}...
+                </option>
+                <option value="ADMIN">
+                  {t("manager-user.modal.update.role-option.admin")}...
+                </option>
                 <option>...</option>
               </select>
             </div>
@@ -129,7 +142,7 @@ const ModalUpdateUser = (props) => {
               <label className="form-label label-upload" htmlFor="labelUpload">
                 <span>
                   <FaRegPlusSquare />
-                  Upload File Image
+                  {t("manager-user.modal.update.image")}
                 </span>
               </label>
               <input
@@ -144,7 +157,7 @@ const ModalUpdateUser = (props) => {
               {previewImage ? (
                 <img src={previewImage} />
               ) : (
-                <span>preview image</span>
+                <span>{t("manager-user.modal.update.preview")}</span>
               )}
             </div>
           </form>
